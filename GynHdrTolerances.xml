@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  GynHdrTolerances.xml
+  Tolerance values for the GYN HDR Catheter & Dwell QA script.
+
+  Copy this file to the same directory as BrachytherapyChecks.dll.
+  The script will load it automatically on startup. If the file is absent,
+  built-in defaults (shown below) are used instead.
+
+  All times are in seconds unless noted. Lengths in cm. Distances in mm.
+-->
+<GynHdrTolerances>
+
+  <!--
+    TreatmentUnit — expected machine name.
+    Leave 'expected' empty (or remove the attribute) to skip the identity check
+    and accept any assigned unit.
+  -->
+  <TreatmentUnit expected="" />
+
+  <!--
+    CatheterCount — acceptable range.
+    A count below 'min' is FAIL; above 'max' is WARN.
+  -->
+  <CatheterCount min="1" max="30" />
+
+  <!--
+    MaxDwellTime — limits for the largest single dwell time across all catheters.
+    warnSec : result is WARN if max dwell time >= this value
+    failSec : result is FAIL if max dwell time >= this value
+  -->
+  <MaxDwellTime warnSec="120" failSec="200" />
+
+  <!--
+    MinActiveDwellTime — every enabled dwell point must have a dwell time >= failSec.
+    Values below this threshold are FAIL.
+  -->
+  <MinActiveDwellTime failSec="0.10" />
+
+  <!--
+    MaxTreatmentTime — sum of all active dwell times.
+    warnSec="1200"  →  20 minutes
+    failSec="1800"  →  30 minutes
+  -->
+  <MaxTreatmentTime warnSec="1200" failSec="1800" />
+
+  <!--
+    MaxActiveLength — straight-line distance from the first to the last active
+    dwell position within a single catheter (reported in cm).
+    warnCm : WARN if any catheter exceeds this
+    failCm : FAIL if any catheter exceeds this
+  -->
+  <MaxActiveLength warnCm="20" failCm="25" />
+
+  <!--
+    DwellSpacing — expected centre-to-centre distance between consecutive active
+    dwell points within a catheter (mm), and the maximum allowed deviation.
+    Gaps outside expectedMm ± toleranceMm are reported as WARN.
+  -->
+  <DwellSpacing expectedMm="5.0" toleranceMm="1.0" />
+
+</GynHdrTolerances>
